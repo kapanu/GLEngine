@@ -1,2 +1,2 @@
-# GLEngine
- Test Project to test GL bugs
+# GLTest
+ 
