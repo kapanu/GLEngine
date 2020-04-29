@@ -13,6 +13,8 @@
 
 @property Renderer renderer;
 
+@property GLKView* glkView;
+
 @end
 
 @implementation GLEViewController
@@ -20,17 +22,21 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  [self renderer].draw();
+  _glkView = [[GLKView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  
+  [self setView:_glkView];
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+- (void)update {
+}
+
+- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
+  // make sure we own the context
+  if ([EAGLContext currentContext] != _glkView.context) {
+    [EAGLContext setCurrentContext: _glkView.context];
+  }
+  [self renderer].draw();
+}
 
 @end

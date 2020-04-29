@@ -1,5 +1,6 @@
 
 class Renderer {
  public:
-  void draw();
+ void draw();
+ void update();
 };
